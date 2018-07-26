@@ -145,7 +145,7 @@ $ ./test.sh 1 2 3
 
 结果：
 
-![](/home/datah/Desktop/GitHub/Linux/Shell/image/shell_1.png)
+![](https://raw.githubusercontent.com/zhi-z/Linux/master/Shell/image/shell_1.png)
 
 另外常用参数传递例子：
 
@@ -328,7 +328,7 @@ fi
 
 运行结果：
 
-![](/home/datah/Desktop/GitHub/Linux/Shell/image/shell_2.png)
+![](https://raw.githubusercontent.com/zhi-z/Linux/master/Shell/image/shell_2.png)
 
 ### 6.3 其他运算符
 
@@ -472,7 +472,7 @@ done
 
 输出结果：
 
-![](/home/datah/Desktop/GitHub/Linux/Shell/image/shell_3.png)
+![](https://raw.githubusercontent.com/zhi-z/Linux/master/Shell/image/shell_3.png)
 
 ### 8.3 while 语句
 
