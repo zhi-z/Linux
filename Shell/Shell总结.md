@@ -145,7 +145,7 @@ $ ./test.sh 1 2 3
 
 结果：
 
-![](/home/datah/Desktop/note/linux/image/1.png)
+![](/home/datah/Desktop/GitHub/Linux/Shell/image/shell_1.png)
 
 另外常用参数传递例子：
 
@@ -275,21 +275,389 @@ a 不等于 b
 - 乘号(*)前边必须加反斜杠(/\)才能实现乘法运算；
 - if...then...fi 是条件语句，后续将会讲解。
 
+### 6.2 字符串运算符
 
 
 
+| =    | 检测两个字符串是否相等，相等返回 true。   | [ $a = $b ] 返回 false。 |
+| ---- | ----------------------------------------- | ------------------------ |
+| !=   | 检测两个字符串是否相等，不相等返回 true。 | [ $a != $b ] 返回 true。 |
+| -z   | 检测字符串长度是否为0，为0返回 true。     | [ -z $a ] 返回 false。   |
+| -n   | 检测字符串长度是否为0，不为0返回 true。   | [ -n "$a" ] 返回 true。  |
+| str  | 检测字符串是否为空，不为空返回 true。     | [ $a ] 返回 true。       |
+
+实例：编写如如下脚本文件，并保存到shell_test.sh
+
+```
+#!/bin/bash
+
+a="abc"
+b="efg"
+
+if [ $a = $b ]
+then
+   echo "$a = $b : a 等于 b"
+else
+   echo "$a = $b: a 不等于 b"
+fi
+if [ $a != $b ]
+then
+   echo "$a != $b : a 不等于 b"
+else
+   echo "$a != $b: a 等于 b"
+fi
+if [ -z $a ]
+then
+   echo "-z $a : 字符串长度为 0"
+else
+   echo "-z $a : 字符串长度不为 0"
+fi
+if [ -n "$a" ]
+then
+   echo "-n $a : 字符串长度不为 0"
+else
+   echo "-n $a : 字符串长度为 0"
+fi
+if [ $a ]
+then
+   echo "$a : 字符串不为空"
+else
+   echo "$a : 字符串为空"
+fi
+```
+
+运行结果：
+
+![](/home/datah/Desktop/GitHub/Linux/Shell/image/shell_2.png)
+
+### 6.3 其他运算符
+
+在Shell中还有其他运算符，在这里不过多介绍。
+
+## 7 echo命令
+
+命令 格式：
+
+```
+echo string
+```
+
+### 7.1 显示普通字符串
+
+```
+echo "my name is shell"
+```
+
+结果：my name is shell
+
+### 7.2 转移字符
+
+```
+echo "\"my name is shell\""
+```
+
+结果：“my name is shell”
+
+### 7.3 显示结果定向至文件
+
+```
+echo "It is a test" > test.txt
+```
+
+### 7.4 其他显示
+
+其他显示还有换行等等。
+
+## 8 控制流程
+
+### 8.1 if esle语句
+
+#### 8.1.1 if
+
+if 语句语法格式：
+
+```
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN 
+fi            # 注意这李是与if是倒过来的
+```
+
+#### 8.1.2 if else
+
+if else 语法格式：
+
+```
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN
+else
+    command
+fi
+```
+
+#### 8.1.3 if else-if else
+
+if else-if else 语法格式：
+
+```
+if condition1
+then
+    command1
+elif condition2 
+then 
+    command2
+else
+    commandN
+fi
+```
+
+条件语句应用：
+
+```
+a=10
+b=20
+if [ $a == $b ]
+then
+   echo "a 等于 b"
+elif [ $a -gt $b ]
+then
+   echo "a 大于 b"
+elif [ $a -lt $b ]
+then
+   echo "a 小于 b"
+else
+   echo "没有符合的条件"
+fi
+```
+
+输出：a 小于 b
+
+### 8.2 for语句
+
+for循环一般格式为：
+
+```
+for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+```
+
+实例：编写如下脚本，并运行。
+
+```
+#!/bin/sh
+
+for i in {1..5}
+do
+    echo $i
+done
 
 
+for i in 5 6 7 8 9
+do
+    echo $i
+done
+```
 
+输出结果：
 
+![](/home/datah/Desktop/GitHub/Linux/Shell/image/shell_3.png)
 
+### 8.3 while 语句
 
+while循环用于不断执行一系列命令，也用于从输入文件中读取数据；命令通常为测试条件。其格式为：
 
-# 未完待续！！
+```
+while condition
+do
+    command
+done
+```
 
+以下是一个基本的while循环，测试条件是：如果int小于等于5，那么条件返回真。int从0开始，每次循环处理时，int加1。运行上述脚本，返回数字1到5，然后终止。
 
+```
+#!/bin/bash
+int=1
+while(( $int<=5 ))
+do
+    echo $int
+    let "int++"
+done
+```
 
+运行脚本，输出：
 
+```
+1
+2
+3
+4
+5
+```
+
+## 9 函数
+
+### 9.1 一般函数
+
+shell中函数的定义格式如下：
+
+```
+[ function ] funname [()]
+
+{
+
+    action;
+
+    [return int;]
+
+}
+```
+
+- 可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。
+- 参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255
+
+实例：
+
+```
+demoFun(){
+    echo "这是我的第一个 shell 函数!"
+}
+echo "-----函数开始执行-----"
+demoFun
+echo "-----函数执行完毕-----"
+```
+
+运行结果：
+
+```
+-----函数开始执行-----
+这是我的第一个 shell 函数!
+-----函数执行完毕-----
+```
+
+### 9.2 传参函数
+
+例如：
+
+```
+funWithParam(){
+    echo "第一个参数为 $1 !"
+    echo "第二个参数为 $2 !"
+    echo "第十个参数为 $10 !"
+    echo "第十个参数为 ${10} !"
+    echo "第十一个参数为 ${11} !"
+    echo "参数总数有 $# 个!"
+    echo "作为一个字符串输出所有参数 $* !"
+}
+funWithParam 1 2 3 4 5 6 7 8 9 34 73
+```
+
+运行结果：
+
+```
+第一个参数为 1 !
+第二个参数为 2 !
+第十个参数为 10 !
+第十个参数为 34 !
+第十一个参数为 73 !
+参数总数有 11 个!
+作为一个字符串输出所有参数 1 2 3 4 5 6 7 8 9 34 73 !
+```
+
+## 10 test 命令
+
+Shell中的 test 命令用于检查某个条件是否成立，它可以进行数值、字符和文件三个方面的测试。
+
+例如：
+
+- 数值测试：代码中的 [] 执行基本的算数运算
+
+  ```
+  num1=100
+  num2=100
+  if test $[num1] -eq $[num2]
+  then
+      echo '两个数相等！'
+  else
+      echo '两个数不相等！'
+  fi
+  
+  ```
+
+  输出结果：
+
+  ```
+  两个数相等！
+  ```
+
+- 字符串测试
+
+  ```
+  num1="ru1noob"
+  num2="runoob"
+  if test $num1 = $num2
+  then
+      echo '两个字符串相等!'
+  else
+      echo '两个字符串不相等!'
+  fi
+  ```
+
+  输出结果：
+
+  ```
+  两个字符串不相等!
+  ```
+
+- 文件测试：
+
+  ```
+  cd /bin
+  if test -e ./bash
+  then
+      echo '文件已存在!'
+  else
+      echo '文件不存在!'
+  fi
+  ```
+
+  输出结果：
+
+  ```
+  文件已存在!
+  ```
+
+## 12 重定向
+
+```
+$echo result > file  #将结果写入文件，结果不会在控制台展示，而是在文件中，覆盖写
+$echo result >> file  #将结果写入文件，结果不会在控制台展示，而是在文件中，追加写
+echo input < file  #获取输入流
+```
+
+## 13 自动提交GitHub脚本
+
+```
+#!/bin/bash
+echo "-------Begin-------"
+git add .
+git commit -m $1
+echo $1
+git push origin master
+echo "--------End--------"
+```
 
 ## 参考文献：
 
