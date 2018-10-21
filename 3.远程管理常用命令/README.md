@@ -76,7 +76,7 @@ $ ping 127.0.0.1
 
 在 Linux 中 SSH 是 **非常常用** 的工具，通过 **SSH 客户端** 我们可以连接到运行了 **SSH 服务器** 的远程机器上 
 
-![](E:\GitHub\Linux\3.远程管理常用命令\image\ssh.png)
+![](.\image\ssh.png)
 
 - **SSH 客户端**是一种使用 `Secure Shell（SSH）` 协议连接到远程计算机的软件程序
 - `SSH` 是目前较可靠，**专为远程登录会话和其他网络服务** 提供安全性的协议
@@ -132,7 +132,7 @@ ssh [-p port] user@remote
 - scp 就是 `secure copy`，是一个在 Linux 下用来进行 **远程拷贝文件** 的命令
 - 它的**地址格式与 ssh 基本相同**，**需要注意的是**，在指定端口时用的是大写的 `-P` 而不是小写的
 
-![](E:\GitHub\Linux\3.远程管理常用命令\image\ssh_submit.png)
+![](.\image\ssh_submit.png)
 
 | 选项 | 含义                                                         |
 | ---- | ------------------------------------------------------------ |
@@ -183,7 +183,31 @@ scp -r user@remote:Desktop test1
 - 上传公钥到服务器 
   - 执行 `ssh-copy-id -p port user@remote`，可以让远程服务器记住我们的公钥
 
+![](image\ssh_key.png)
 
+传输过程中使用的是非对称加密算法:
+
+- 使用 **公钥** 加密的数据，需要使用 **私钥** 解密
+- 使用 **私钥** 加密的数据，需要使用 **公钥** 解密
+
+> 注意：
+>
+> 本地使用私钥对数据进行加密/解密
+>
+> 服务器使用公钥对数据进行加密/解密
+
+#### 2.3.2 配置别名
+
+每次都输入 `ssh -p port user@remote`，时间久了会觉得很麻烦，特别是当 `user`, `remote` 和 `port` 都得输入，而且还不好记忆 。而 **配置别名** 可以让我们进一步偷懒，譬如用：`ssh ubuntu` 来替代上面这么一长串，那么就在 `~/.ssh/config` 里面追加以下内容： 
+
+```
+Host ubuntu
+    HostName ip地址
+    User itheima
+    Port 22
+```
+
+**保存之后，即可用 ssh ubuntu实现远程登录了，scp 同样可以使用** 
 
 ## 3 其他
 
