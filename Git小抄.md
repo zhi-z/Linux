@@ -26,3 +26,26 @@ youuser ALL=(ALL) NOPASSWD: ALL
 4.撤销sudoers文件写权限,命令: 
 chmod u-w /etc/sudoers
 
+
+
+Ubuntu ssh安装
+
+1.准备工作： 
+确认Ubuntu中安装并启动了ssh，方法如下：
+
+sudo apt-get install openssh-server
+1
+如果没安装过ssh，那么就会安装，如果提示已经安装过了，那就接着执行：
+
+ps -e |grep ssh
+1
+如果只有ssh-agent那ssh-server还没有启动，需要/etc/init.d/ssh start，如果看到sshd那说明ssh-server已经启动了。 
+2.连接 
+vitualbox中设置->网络->网络，设置连接方式为桥接 
+ifconfig获得inet地址 
+用putty连接该地址的22端口即可
+--------------------- 
+作者：somehow1002 
+来源：CSDN 
+原文：https://blog.csdn.net/somehow1002/article/details/78511783 
+版权声明：本文为博主原创文章，转载请附上博文链接！
