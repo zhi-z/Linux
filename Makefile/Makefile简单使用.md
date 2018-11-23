@@ -158,5 +158,4 @@ all:
 
 ## 参考文档:
 
-- 百度搜 "gnu make 于凤昌"
 - 官方文档: http://www.gnu.org/software/make/manual/
