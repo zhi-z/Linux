@@ -9,11 +9,15 @@
 
 ### 2.1 直接使用gcc进行编译
 
+它们要经过预处理、编译、汇编和连接过程，最终的到可执行的文件。
+
 简单, 但是会对所有文件都处理一次, 文件多时如果只修改其中一个文件会导致效率低
 
 ```
 gcc -o test a.c b.c  
 ```
+
+其实上面主要经过两个步骤：第一个是把a.c和b.c编译分别得到一个xxx.s文件，然后再进行汇编得到两个xxx.o文件，最后再把这两个文件进行连接得到可执行的文件。
 
 ### 2.2 使用Makefile方式
 
@@ -40,6 +44,21 @@ b.o : b.c
 ```
 
 当只修改a.c文件时候，就会只执行a.c一下的命令。
+
+- 如果编译生成的需要在arm中运行，则可以使用如下：
+
+```
+all:
+	arm-linux-gcc -c -o led_on.o led_on.S     // 编译 
+	arm-linux-ld -Ttext 0 led_on.o -o led_on.elf  // 链接
+	arm-linux-objcopy -O binary -S led_on.elf led_on.bin  // 生成bin文件
+	arm-linux-objdump -D led_on.elf > led_on.dis  // 把 led_on.elf进行反汇编，这样可以查看汇编指令了
+clean:
+	rm *.bin *.o *.elf
+	
+```
+
+
 
 ### 2.3 Makefile的语法
 
