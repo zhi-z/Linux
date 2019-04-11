@@ -76,7 +76,7 @@ $ ping 127.0.0.1
 
 在 Linux 中 SSH 是 **非常常用** 的工具，通过 **SSH 客户端** 我们可以连接到运行了 **SSH 服务器** 的远程机器上 
 
-![](.\image\ssh.png)
+![](image/ssh.png)
 
 - **SSH 客户端**是一种使用 `Secure Shell（SSH）` 协议连接到远程计算机的软件程序
 - `SSH` 是目前较可靠，**专为远程登录会话和其他网络服务** 提供安全性的协议
@@ -132,7 +132,7 @@ ssh [-p port] user@remote
 - scp 就是 `secure copy`，是一个在 Linux 下用来进行 **远程拷贝文件** 的命令
 - 它的**地址格式与 ssh 基本相同**，**需要注意的是**，在指定端口时用的是大写的 `-P` 而不是小写的
 
-![](.\image\ssh_submit.png)
+![](image/ssh_submit.png)
 
 | 选项 | 含义                                                         |
 | ---- | ------------------------------------------------------------ |
@@ -183,7 +183,7 @@ scp -r user@remote:Desktop test1
 - 上传公钥到服务器 
   - 执行 `ssh-copy-id -p port user@remote`，可以让远程服务器记住我们的公钥
 
-![](image\ssh_key.png)
+![](image/ssh_key.png)
 
 传输过程中使用的是非对称加密算法:
 
